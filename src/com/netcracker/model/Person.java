@@ -1,40 +1,47 @@
 package com.netcracker.model;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class Person {
-//    private int id;
-//    private static int nextId = 1;
-//    @NotNull
-//    @Size(min=2, max=25)
+    private int id;
+    private static int nextId = 1;
+    @NotBlank
+    @Size(min=1, max=50, message = "Have must be between 3 and 50 characters")
     private String name;
-//    @NotNull
+
+    @Size(min=1, max=50, message = "Have must be between 1 and 50 characters")
     private String lastName;
 //    private String thirdName;
 //    private byte age;
 //    private long salary;
-//    @NotNull
-//    @Size(min=1, message = "Email")
-//    private String email;
-//    private String jobAddress;
+    @NotBlank
+    @Email(message = "Invalid email. Try again")
+    private String email;
 
-    public Person(String name, String lastName) {
-        //this.id = nextId;
+    private PersonJobAddressType jobAddress; //enum
+
+    public Person(){
+        this.id = nextId;
+        nextId++;
+    }
+
+    public Person(String name, String lastName, String email, PersonJobAddressType jobAddress) {
+        this();
         this.name = name;
         this.lastName = lastName;
 //        this.thirdName = thirdName;
 //        this.age = age;
 //        this.salary = salary;
-//        this.email = email;
-//        this.jobAddress = jobAddress;
-//        nextId++;
+        this.email = email;
+        this.jobAddress = jobAddress;
     }
 //
-//    public int getId() {
-//        return id;
-//    }
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -56,14 +63,14 @@ public class Person {
 //        return salary;
 //    }
 //
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public String getJobAddress() {
-//        return jobAddress;
-//    }
-//
+    public String getEmail() {
+        return email;
+    }
+
+    public PersonJobAddressType getJobAddress() {
+        return jobAddress;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -84,33 +91,33 @@ public class Person {
 //        this.salary = salary;
 //    }
 //
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    public void setJobAddress(String jobAddress) {
-//        this.jobAddress = jobAddress;
-//    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setJobAddress(PersonJobAddressType jobAddress) {
+        this.jobAddress = jobAddress;
+    }
 
     @Override
     public String toString() {
         return getName();
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Person person = (Person) o;
-//
-//        return id == person.id;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        return id == person.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 
 

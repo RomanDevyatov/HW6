@@ -14,13 +14,13 @@ public class PersonData {
         return persons.values();
     }
 
-//    public static Person getById(int id){
-//        return persons.get(id);
-//    }
-////
-////    public static void add(Person person) {
-////        persons.put(person.getId(), person);
-//    }
+    public static Person getById(int id){
+        return persons.get(id);
+    }
+
+    public static void add(Person person) {
+        persons.put(person.getId(), person);
+    }
 
     public static void remove(int id){
         persons.remove(id);
