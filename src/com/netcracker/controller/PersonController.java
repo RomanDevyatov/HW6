@@ -16,8 +16,6 @@ import javax.validation.Valid;
 @Controller
 public class PersonController {
 
-    //private static List<Person> persons=new ArrayList<>();
-
     @GetMapping("/persons")
     public String displayAllPersons(Model model) {
         model.addAttribute("title","All Persons");
@@ -37,7 +35,7 @@ public class PersonController {
     public String processCreatePersonForm(@ModelAttribute @Valid Person newPerson,
                                           Errors errors, Model model){
         if(errors.hasErrors()) {
-            model.addAttribute("title", "Create Event");
+            model.addAttribute("title", "Create Person");
             model.addAttribute("errorMsg", "Bad Data!");
             return "persons/create";
         }
@@ -54,10 +52,28 @@ public class PersonController {
 
     @PostMapping("persons/delete")
     public String processDeletePersonsForm(@RequestParam(required = false) int[] personIds){
-        for(int id : personIds){
-            PersonData.remove(id);
+        if(personIds!= null) {
+            for (int id : personIds) {
+                PersonData.remove(id);
+            }
         }
         return "redirect:";
+    }
+
+    @GetMapping("persons/find")
+    public String displayFindPersonForm(Model model){
+        model.addAttribute("title", "Find Person");
+        model.addAttribute("persons", PersonData.getAll());
+        return "persons/find";
+    }
+
+    @PostMapping("persons/find")
+    public String processDeletePersonsForm(@RequestParam String personName,
+                                           @RequestParam String personEmail){
+        if(PersonData.find(personName, personEmail)==0) {
+            return "persons/success";
+        }
+        return "persons/find";
     }
 
 
