@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:frgment="head">
+    <title>Coding Persons</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav th:fragment="header">
+    <h1 th:text="${title}"></h1>
+    <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="/persons">All Persons</a></li>
+        <li class="nav-item"><a class="nav-link" href="/persons/create">Create Person</a></li>
+    </ul>
+</nav>
+<!--<table class="table table-stripped"></table>-->
+<!--<thead>-->
+<!--<tr>-->
+<!--    <th>ID</th>-->
+<!--    <th>Name</th>-->
+<!--    <th>LastName</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tr th:each="person: ${person}">-->
+<!--    <td th:text="${person.id}"></td>-->
+<!--    <td th:text="${person.name}"></td>-->
+<!--    <td th:text="${person.lastName}"></td>-->
+<!--</tr>-->
+
+
+
+</body>
+</html>

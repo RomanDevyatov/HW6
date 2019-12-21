@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Adding person</h1>
-<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+<h1>Sign Up</h1>
+<form action="#" th:action="@{/signup}" th:object="${person}" method="post">
     <p>name: <input type="text" th:field="*{name}" /></p>
     <p>lastName: <input type="text" th:field="*{lastName}" /></p>
     <p>thirdName: <input type="text" th:field="*{thirdName}" /></p>

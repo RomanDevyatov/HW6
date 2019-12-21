@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Welcome!</h1>
-
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+<h1>Hello, what would you like to do?</h1>
+<a href="/signup">Add person</a><br>
+<a href="/search">Search person</a><br>
+<a href="/delete">Delete person</a><br>
 </body>
 </html>

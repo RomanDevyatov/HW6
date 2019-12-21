@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SearchController {
 
-    @GetMapping("/search")
-    public String login(Model model) {
-        model.addAttribute( "pers", new Person());
-        return "search";
-    }
+//    @GetMapping("/search")
+//    public String login(Model model) {
+//        model.addAttribute( "pers", new Person());
+//        return "search";
+//    }
 
     @PostMapping("/search")
     public String searchSubmit(){
-        return "result";
+        return "res";
     }
 
 }
