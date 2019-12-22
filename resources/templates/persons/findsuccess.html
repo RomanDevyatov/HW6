@@ -22,7 +22,7 @@
         <th>Job Address</th>
     </tr>
     </thead>
-    <tr>
+    <tr th:each="findperson : ${findpersons}">
         <td th:text="${findperson.id}"></td>
         <td th:text="${findperson.name}"></td>
         <td th:text="${findperson.lastName}"></td>

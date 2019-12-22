@@ -61,8 +61,9 @@ public class PersonData {
         persons.remove(id);
     }
 
-    public static Person findByNameLastName(String name, String lastName) {
+    public static List<Person> findByNameLastName(String name, String lastName) {
         if (!persons.isEmpty()) {
+            List<Person> personList=new LinkedList<>();
 
             int count = 0;
             Iterator<Map.Entry<Integer, Person>> iterator = persons.entrySet().iterator();
@@ -71,9 +72,10 @@ public class PersonData {
                 Map.Entry<Integer, Person> pair1 = iterator.next();
                 Person value = pair1.getValue();
                 if (value.getName().equals(name) && value.getLastName().equals(lastName)) {
-                    return value;
+                    personList.add(value);
                 }
             }
+            return personList;
         }
         return null;
     }

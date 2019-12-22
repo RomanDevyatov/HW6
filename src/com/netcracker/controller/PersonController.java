@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class PersonController {
@@ -71,17 +72,18 @@ public class PersonController {
 //    @RequestParam String personName,
 //    @RequestParam String personEmail,
     @PostMapping("persons/find")
-    public String processFindPersonsForm( @RequestParam String personName,
-                                          @RequestParam String personLastName,
-                                          @ModelAttribute Person per, Model model){
+    public String processFindPersonsForm(@RequestParam String personName,
+                                         @RequestParam String personLastName,
+                                         Model model){
 
 //        if(errors.hasErrors()) {
 //            model.addAttribute("title", "Not Found, try again");
 //            return "persons/find";
 //        }
 
-        if((per=PersonData.findByNameLastName(personName, personLastName))!=null) {
-            model.addAttribute("findperson", per);
+        List<Person> perList;
+        if((perList =PersonData.findByNameLastName(personName, personLastName))!=null) {
+            model.addAttribute("findpersons", perList);
             return "persons/findsuccess";
         }
         model.addAttribute("title", "Find person. Not Found, try again!");
