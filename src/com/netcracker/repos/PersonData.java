@@ -1,11 +1,10 @@
 package com.netcracker.repos;
 
 import com.netcracker.model.Person;
+import com.netcracker.model.PersonJobAddressType;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class PersonData {
 
@@ -14,6 +13,41 @@ public class PersonData {
     public static Collection<Person> getAll() {
         return persons.values();
     }
+
+    public static void readFromFile() throws IOException {
+        File file = new File("resources/persons.txt");
+        Scanner scanFile = new Scanner(file);
+        int count = 0;
+        while (scanFile.hasNextLine()) {
+            scanFile.nextLine();
+            count++;
+        }
+        scanFile.close();
+
+        String slova[] = new String[count];
+        Scanner scanFile2 = new Scanner(file);
+        for (int i = 0;i < slova.length;i++){
+            slova[i] = scanFile2.nextLine();
+            String[] lineWords = slova[i].split(" ");
+            String name = lineWords[0];
+            String lastName = lineWords[1];
+            String thirdName = lineWords[2];
+            int age = Integer.parseInt(lineWords[3]);
+            int salary = Integer.parseInt(lineWords[4]);
+            String email = lineWords[5];
+            String address = lineWords[6];
+
+            PersonData.add(new Person(name, lastName, thirdName, age, salary, email, PersonJobAddressType.toPersonJobAddressType(address)));
+        }
+        scanFile2.close();
+    }
+
+
+
+
+
+
+
 
     public static Person getById(int id) {
         return persons.get(id);
@@ -27,7 +61,26 @@ public class PersonData {
         persons.remove(id);
     }
 
-    public static int find(String name, String email) {
+    public static Person findByNameLastName(String name, String lastName) {
+        if (!persons.isEmpty()) {
+
+            int count = 0;
+            Iterator<Map.Entry<Integer, Person>> iterator = persons.entrySet().iterator();
+
+            while (iterator.hasNext()){
+                Map.Entry<Integer, Person> pair1 = iterator.next();
+                Person value = pair1.getValue();
+                if (value.getName().equals(name) && value.getLastName().equals(lastName)) {
+                    return value;
+                }
+            }
+        }
+        return null;
+    }
+
+
+
+    public static int findByNameEmail(String name, String email) {
         if (!persons.isEmpty()) {
 
             int count = 0;

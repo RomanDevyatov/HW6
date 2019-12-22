@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body class ="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+    <div class="form-group">
+        <label>Name
+            <!--            <input type="text" name="personName" class="form-control">-->
+            <input th:field= "${person.name}" class="form-control">
+        </label>
+        <p class ="error" th:errors="${person.name}"></p>
+    </div>
+    <div class="form-group">
+        <label>Email
+            <!--            <input type="text" name="personName" class="form-control">-->
+            <input th:field= "${person.email}" class="form-control">
+        </label>
+        <p class ="error" th:errors="${person.email}"></p>
+    </div>
+    <div class="form-group">
+        <input type="submit" value ="Sign in" class="btn btn-control">
+    </div>
+</form>
+</body>
+</html>

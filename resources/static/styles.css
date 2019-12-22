@@ -4,3 +4,7 @@ body{
 .error{
     color:red;
 }
+.login{
+    font-size: 30px;
+    color:green;
+}

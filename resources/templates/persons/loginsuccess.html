@@ -1,11 +1,15 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
+<!--<link rel="stylesheet" th:href="@{/styles.css}">-->
 <body class ="container">
 
 <header th:replace="fragments :: header"></header>
 
-<h1>Congrats, person is found!</h1>
+<h1>Congrats, </h1>
+<p class="login" th:text="${person.name}" />
+<h2>you are signed in!</h2>
+<!--<p th:text="'content: ' + ${person.lastName}" />-->
 
 </body>
 </html>

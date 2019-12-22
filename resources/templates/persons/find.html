@@ -9,12 +9,16 @@
     <div class="form-group">
         <label>Name
             <input type="text" name="personName" class="form-control">
+<!--            <input th:field= "${person.name}" class="form-control">-->
         </label>
+<!--        <p class ="error" th:errors="${person.name}"></p>-->
     </div>
     <div class="form-group">
-        <label>Email
-            <input type="text" name = "personEmail" class="form-control">
+        <label>Last Name
+            <input type="text" name="personLastName" class="form-control">
+<!--            <input th:field= "${person.lastName}" class="form-control">-->
         </label>
+<!--        <p class ="error" th:errors="${person.lastName}"></p>-->
     </div>
     <div class="form-group">
         <input type="submit" value ="Find" class="btn btn-control">

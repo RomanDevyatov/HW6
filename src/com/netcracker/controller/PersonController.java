@@ -36,7 +36,6 @@ public class PersonController {
                                           Errors errors, Model model){
         if(errors.hasErrors()) {
             model.addAttribute("title", "Create Person");
-            model.addAttribute("errorMsg", "Bad Data!");
             return "persons/create";
         }
         PersonData.add(newPerson);
@@ -63,18 +62,61 @@ public class PersonController {
     @GetMapping("persons/find")
     public String displayFindPersonForm(Model model){
         model.addAttribute("title", "Find Person");
+        model.addAttribute(new Person());
         model.addAttribute("persons", PersonData.getAll());
         return "persons/find";
     }
-
+//    @ModelAttribute @Valid Person newFindPerson,
+//    Errors errors,
+//    @RequestParam String personName,
+//    @RequestParam String personEmail,
     @PostMapping("persons/find")
-    public String processDeletePersonsForm(@RequestParam String personName,
-                                           @RequestParam String personEmail){
-        if(PersonData.find(personName, personEmail)==0) {
-            return "persons/success";
+    public String processFindPersonsForm( @RequestParam String personName,
+                                          @RequestParam String personLastName,
+                                          @ModelAttribute Person per, Model model){
+
+//        if(errors.hasErrors()) {
+//            model.addAttribute("title", "Not Found, try again");
+//            return "persons/find";
+//        }
+
+        if((per=PersonData.findByNameLastName(personName, personLastName))!=null) {
+            model.addAttribute("findperson", per);
+            return "persons/findsuccess";
         }
+        model.addAttribute("title", "Find person. Not Found, try again!");
         return "persons/find";
     }
 
 
+    @GetMapping("persons/login")
+    public String displayLoginPersonForm(Model model){
+        model.addAttribute("title", "Login");
+        model.addAttribute(new Person());
+        model.addAttribute("persons", PersonData.getAll());
+        return "persons/login";
+    }
+
+    @PostMapping("persons/login")
+    public String processLoginPersonForm(@ModelAttribute @Valid Person newFindPerson,
+                                           Errors errors, Model model){
+        if(errors.hasErrors()) {
+            model.addAttribute("title", "Login. Uncorrected, try again");
+            return "persons/login";
+        }
+        if(PersonData.findByNameEmail(newFindPerson.getName(), newFindPerson.getEmail())==0) {
+            return "persons/loginsuccess";
+        }
+        model.addAttribute("title", "Login. Uncorrected, try again");
+        return "persons/login";
+    }
+//    @GetMapping("persons/loginsuccess")
+//    public String displayLoginSuccessPersonForm(Model model){
+//        model.addAttribute("title", "Login");
+//        model.addAttribute(new Person());
+//        model.addAttribute("persons", PersonData.getAll());
+//        return "persons/loginsuccess";
+//
+//
+//}
 }

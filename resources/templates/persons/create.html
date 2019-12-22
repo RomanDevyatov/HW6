@@ -11,14 +11,34 @@
             <input th:field= "${person.name}" class="form-control">
         </label>
         <p class ="error" th:errors="${person.name}"></p>
-    </div>
+
     <div class="form-group">
         <label>Last Name
             <input th:field= "${person.lastName}" class="form-control">
         </label>
         <p class ="error" th:errors="${person.lastName}"></p>
     </div>
+    </div>
+    <div class="form-group">
+        <label>Third Name
+            <input th:field= "${person.thirdName}" class="form-control">
+        </label>
+        <p class ="error" th:errors="${person.thirdName}"></p>
+    </div>
+    </div>
 
+    <div class="form-group">
+        <label>Age
+            <input th:field= "${person.age}" class="form-control">
+        </label>
+        <p class ="error" th:errors="${person.age}"></p>
+    </div>
+    <div class="form-group">
+        <label>Salary
+            <input th:field= "${person.salary}" class="form-control">
+        </label>
+        <p class ="error" th:errors="${person.salary}"></p>
+    </div>
     <div class="form-group">
         <label>Email
             <input th:field= "${person.email}" class="form-control">
