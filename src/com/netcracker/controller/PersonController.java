@@ -77,8 +77,6 @@ public class PersonController {
     }
 //    @ModelAttribute @Valid Person newFindPerson,
 //    Errors errors,
-//    @RequestParam String personName,
-//    @RequestParam String personEmail,
     @PostMapping("persons/find")
     public String processFindPersonsForm(@RequestParam String personName,
                                          @RequestParam String personLastName,
@@ -127,13 +125,4 @@ public class PersonController {
         model.addAttribute("title", "Login. Uncorrected, try again");
         return "persons/login";
     }
-//    @GetMapping("persons/loginsuccess")
-//    public String displayLoginSuccessPersonForm(Model model){
-//        model.addAttribute("title", "Login");
-//        model.addAttribute(new Person());
-//        model.addAttribute("persons", PersonData.getAll());
-//        return "persons/loginsuccess";
-//
-//
-//}
 }
