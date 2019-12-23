@@ -3,6 +3,7 @@ package com.netcracker.controller;
 import com.netcracker.model.Person;
 import com.netcracker.model.PersonJobAddressType;
 import com.netcracker.repos.PersonData;
+import eu.bitwalker.useragentutils.UserAgent;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -75,6 +76,11 @@ public class PersonController {
         model.addAttribute("persons", PersonData.getAll());
         return "persons/find";
     }
+
+    public UserAgent toKnowUserAgent(HttpServletRequest request){
+        return UserAgent.parseUserAgentString((request.getHeader("User-Agent")));
+    }
+
 //    @ModelAttribute @Valid Person newFindPerson,
 //    Errors errors,
     @PostMapping("persons/find")
@@ -94,9 +100,8 @@ public class PersonController {
         if(perList.size()>0) {
             model.addAttribute("findpersons", perList);
             String accessTime="access time = "+lastAccessedTime.toString();
-            String sessionId="Session id = "+id.toString();
             model.addAttribute("accessTime", accessTime);
-            model.addAttribute("sessionId", sessionId);
+            model.addAttribute("userAgent",  toKnowUserAgent(request));
             return "persons/findsuccess";
         }
         model.addAttribute("title", "Find person. Not Found, try again!");
