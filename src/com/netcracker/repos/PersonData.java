@@ -10,8 +10,19 @@ public class PersonData {
 
     private static final Map<Integer, Person> persons = new HashMap<>();
 
+
     public static Collection<Person> getAll() {
         return persons.values();
+    }
+
+    public static void writeInFile() throws IOException {
+        try ( PrintWriter writer = new PrintWriter(new File("resources/output.txt")) ) {
+            for ( Map.Entry<Integer, Person> entry : persons.entrySet() ) {
+                writer.write( entry.getKey() + " " + entry.getValue().getName() +" " + entry.getValue().getLastName()+" " + entry.getValue().getThirdName()+" " + entry.getValue().getAge()+" " + entry.getValue().getSalary()+" " + entry.getValue().getEmail()+" " + entry.getValue().getJobAddress() + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void readFromFile() throws IOException {
@@ -41,12 +52,6 @@ public class PersonData {
         }
         scanFile2.close();
     }
-
-
-
-
-
-
 
 
     public static Person getById(int id) {

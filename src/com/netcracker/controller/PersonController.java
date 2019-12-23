@@ -11,11 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class PersonController {
+
 
     @GetMapping("/persons")
     public String displayAllPersons(Model model) {
@@ -34,12 +40,13 @@ public class PersonController {
 
     @PostMapping("persons/create")
     public String processCreatePersonForm(@ModelAttribute @Valid Person newPerson,
-                                          Errors errors, Model model){
+                                          Errors errors, Model model) throws IOException {
         if(errors.hasErrors()) {
             model.addAttribute("title", "Create Person");
             return "persons/create";
         }
         PersonData.add(newPerson);
+        PersonData.writeInFile();
         return "redirect:";
     }
 
@@ -51,11 +58,12 @@ public class PersonController {
     }
 
     @PostMapping("persons/delete")
-    public String processDeletePersonsForm(@RequestParam(required = false) int[] personIds){
+    public String processDeletePersonsForm(@RequestParam(required = false) int[] personIds) throws IOException {
         if(personIds!= null) {
             for (int id : personIds) {
                 PersonData.remove(id);
             }
+            PersonData.writeInFile();
         }
         return "redirect:";
     }
@@ -74,16 +82,23 @@ public class PersonController {
     @PostMapping("persons/find")
     public String processFindPersonsForm(@RequestParam String personName,
                                          @RequestParam String personLastName,
-                                         Model model){
-
+                                         Model model, HttpServletRequest request, HttpServletResponse response){
+        HttpSession session=request.getSession(true);
+        Date creationTime=new Date(((HttpSession) session).getCreationTime());
+        Date lastAccessedTime = new Date(session.getLastAccessedTime());
+        String id=session.getId();
 //        if(errors.hasErrors()) {
 //            model.addAttribute("title", "Not Found, try again");
 //            return "persons/find";
 //        }
 
-        List<Person> perList;
-        if((perList =PersonData.findByNameLastName(personName, personLastName))!=null) {
+        List<Person> perList=PersonData.findByNameLastName(personName, personLastName);
+        if(perList.size()>0) {
             model.addAttribute("findpersons", perList);
+            String accessTime="access time = "+lastAccessedTime.toString();
+            String sessionId="Session id = "+id.toString();
+            model.addAttribute("accessTime", accessTime);
+            model.addAttribute("sessionId", sessionId);
             return "persons/findsuccess";
         }
         model.addAttribute("title", "Find person. Not Found, try again!");
