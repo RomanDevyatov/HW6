@@ -14,5 +14,4 @@ public class SpringBootStarter {
         PersonData.writeInFile();
         SpringApplication.run(SpringBootStarter.class, args);
     }
-
 }
