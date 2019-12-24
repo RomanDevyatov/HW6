@@ -4,29 +4,16 @@ import com.netcracker.model.Person;
 import com.netcracker.model.PersonJobAddressType;
 import com.netcracker.repos.PersonData;
 import eu.bitwalker.useragentutils.UserAgent;
-import jdk.internal.instrumentation.Logger;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.context.support.StaticApplicationContext;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.*;
-import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
@@ -125,7 +112,6 @@ public class PersonController {
         model.addAttribute("title", "Find person. Not Found, try again!");
         return "persons/find";
     }
-
 
     @GetMapping("persons/login")
     public String displayLoginPersonForm(Model model){
