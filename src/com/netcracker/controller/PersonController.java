@@ -43,7 +43,6 @@ public class PersonController {
         response.setHeader("Content-Diposition", String.format("attachment; filename=\"$s\"", downloadFile.getName()));
 
         FileCopyUtils.copy(inputStream, response.getOutputStream());
-
     }
 
     @GetMapping("persons/create")

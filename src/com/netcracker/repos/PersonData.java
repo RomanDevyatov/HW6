@@ -10,7 +10,6 @@ public class PersonData {
 
     private static final Map<Integer, Person> persons = new HashMap<>();
 
-
     public static Collection<Person> getAll() {
         return persons.values();
     }
@@ -53,7 +52,6 @@ public class PersonData {
         scanFile2.close();
     }
 
-
     public static Person getById(int id) {
         return persons.get(id);
     }
@@ -84,8 +82,6 @@ public class PersonData {
         }
         return null;
     }
-
-
 
     public static int findByNameEmail(String name, String email) {
         if (!persons.isEmpty()) {
