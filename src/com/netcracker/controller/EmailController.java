@@ -23,7 +23,8 @@ public class EmailController {
     @PostMapping("/persons/email")
     public String processEmailPersonForm(@RequestParam String emailFrom,
                                          @RequestParam String emailPassword,
-                                         @RequestParam String emailTo
+                                         @RequestParam String emailTo,
+                                         @RequestParam String textMessage
                                          ){
         try {
             String pass=emailPassword;
@@ -49,7 +50,7 @@ public class EmailController {
             InternetAddress addressTo = new InternetAddress(emailTo);
             msg.setRecipient(Message.RecipientType.TO, addressTo);
             msg.setSubject("testemail");
-            msg.setText("Hello from Java");
+            msg.setText(textMessage);
             Transport.send(msg);
         } catch (Throwable e) {
             System.err.println("Exception : " + e.toString());

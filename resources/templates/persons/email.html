@@ -6,25 +6,45 @@
 <header th:replace="fragments :: header"></header>
 
 <form method="post">
-    <div class="form-group">
-        <label>Your Email:
-            <input type="text" name="emailFrom" class="form-control">
-        </label>
-    </div>
 
-    <div class="form-group">
-        <label>Your Password:
-            <input type="password" name="emailPassword" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Send To:
-            <input type="text" name="emailTo" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <input type="submit" value ="Send" class="btn1">
-        <input type="reset" value="Reset" class="btn1" />
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Your Email:
+                        <input type="text" name="emailFrom" class="form-control">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Password:
+                        <input type="password" name="emailPassword" class="form-control">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Send To:
+                        <input type="text" name="emailTo" class="form-control">
+                    </label>
+                </div>
+
+                <input type="submit" value ="Send" class="btn1">
+                <input type="reset" value="Reset" class="btn1" />
+
+            </div>
+            <div class="col-sm wall">
+                <h3>Message text</h3>
+                <textarea rows="10" cols="80" name="textMessage" ></textarea>
+<!--                <label for="textComment"></label><textarea id="textComment" name="textComment" class="inner"-->
+<!--                                                           style="padding-bottom:350px;-->
+<!--                            font-size:16px;-->
+<!--                            height: 300px;-->
+<!--                            width: 500px;"-->
+<!--                ></textarea>-->
+
+            </div>
+        </div>
+
     </div>
 </form>
 

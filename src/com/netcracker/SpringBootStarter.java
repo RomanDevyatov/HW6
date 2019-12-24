@@ -10,8 +10,9 @@ import java.io.IOException;
 public class SpringBootStarter {
 
     public static void main(String[] args) throws IOException {
-        SpringApplication.run(SpringBootStarter.class, args);
         PersonData.readFromFile();
+        PersonData.writeInFile();
+        SpringApplication.run(SpringBootStarter.class, args);
     }
 
 }

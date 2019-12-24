@@ -16,7 +16,7 @@ public class PersonData {
     }
 
     public static void writeInFile() throws IOException {
-        try ( PrintWriter writer = new PrintWriter(new File("resources/output.txt")) ) {
+        try ( PrintWriter writer = new PrintWriter(new File("resources/download/output.txt")) ) {
             for ( Map.Entry<Integer, Person> entry : persons.entrySet() ) {
                 writer.write( entry.getKey() + " " + entry.getValue().getName() +" " + entry.getValue().getLastName()+" " + entry.getValue().getThirdName()+" " + entry.getValue().getAge()+" " + entry.getValue().getSalary()+" " + entry.getValue().getEmail()+" " + entry.getValue().getJobAddress() + "\n");
             }
@@ -26,7 +26,7 @@ public class PersonData {
     }
 
     public static void readFromFile() throws IOException {
-        File file = new File("resources/persons.txt");
+        File file = new File("resources/upload/persons.txt");
         Scanner scanFile = new Scanner(file);
         int count = 0;
         while (scanFile.hasNextLine()) {

@@ -4,25 +4,34 @@ import com.netcracker.model.Person;
 import com.netcracker.model.PersonJobAddressType;
 import com.netcracker.repos.PersonData;
 import eu.bitwalker.useragentutils.UserAgent;
+import jdk.internal.instrumentation.Logger;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.context.support.StaticApplicationContext;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
 @Controller
 public class PersonController {
-
 
     @GetMapping("/persons")
     public String displayAllPersons(Model model) {
@@ -30,6 +39,58 @@ public class PersonController {
         model.addAttribute( "persons", PersonData.getAll());
         return "persons/index";
     }
+
+    @GetMapping("/persons/download")
+    public void doDownload(HttpServletRequest request,
+                           HttpServletResponse response, Model model) throws IOException {
+
+        File downloadFile = new File("E:\\Java\\hw6-1\\resources\\download\\output.txt");
+        InputStream inputStream= new BufferedInputStream((new FileInputStream(downloadFile)));
+        String mimeType= URLConnection.guessContentTypeFromStream(inputStream);
+
+        if(mimeType==null){
+            mimeType= "application/msword";
+//            mimeType= "text/html";
+        }
+
+        response.setContentType(mimeType);
+        response.setContentLength((int) downloadFile.length());
+        response.setHeader("Content-Diposition", String.format("attachment; filename=\"$s\"", downloadFile.getName()));
+
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+
+//        model.addAttribute("title","All Persons");
+//        model.addAttribute( "persons", PersonData.getAll());
+//        return "persons/index";
+    }
+
+
+
+//    @RequestMapping("/persons/{fileName:.+}")
+//    public void processDownloadPersons(HttpServletRequest request,
+//                                         HttpServletResponse response,
+//                                         Model model,
+//                                         @PathVariable("fileName") String fileName) throws IOException {
+//        String dataDirectory = request.getServletContext().getRealPath("/resource/");
+//        Path file = Paths.get(dataDirectory, fileName);
+//        if (Files.exists(file))
+//        {
+//            response.setContentType("text/plain");
+//            response.addHeader("Content-Disposition", "attachment; filename="+fileName);
+//            try
+//            {
+//                Files.copy(file, response.getOutputStream());
+//                response.getOutputStream().flush();
+//            }
+//            catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        model.addAttribute("title","All Persons");
+//        model.addAttribute( "persons", PersonData.getAll());
+//        //return "persons/index";
+//    }
 
     @GetMapping("persons/create")
     public String displayCreatePersonForm(Model model){

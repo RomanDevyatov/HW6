@@ -14,10 +14,5 @@ public class HomeController {
         return "index";
     }
 
-    @PostMapping("/")
-    public String greetingSubmit(Model model){
-
-        return "result";
-    }
 
 }
