@@ -117,7 +117,7 @@ public class PersonController {
         List<Person> perList=PersonData.findByNameLastName(personName, personLastName);
         if(perList.size()>0) {
             model.addAttribute("findpersons", perList);
-            String accessTime="access time = "+new Date();
+            String accessTime="Time = " + new Date();
             model.addAttribute("accessTime", accessTime);
             model.addAttribute("userAgent",  toKnowUserAgent(request));
             return "persons/findsuccess";
