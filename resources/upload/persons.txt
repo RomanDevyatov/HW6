@@ -3,3 +3,7 @@ Sveta Stuart Alexandrovna 28 60000 sveta@mail.ru Beketova
 Harry Sweater Petrovich 21 40000 harry@mail.ru BolhhayaPokrovskaya
 Vera Versus Pedro 23 55000 versus@mail.ru Maslyakova
 Hugo Reach Troy 18 100000 hugo1@mail.ru BolhhayaPokrovskaya
+<<<<<<< HEAD
+=======
+Gleb Akimov Cracker 30 250000 gleb_1@mail.ru Gagarina
+>>>>>>> refactor #1

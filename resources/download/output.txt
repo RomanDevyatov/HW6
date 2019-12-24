@@ -3,3 +3,4 @@
 3 Harry Sweater Petrovich 21 40000 harry@mail.ru POKROVSKAYA
 4 Vera Versus Pedro 23 55000 versus@mail.ru MASLYZKOVA
 5 Hugo Reach Troy 18 100000 hugo1@mail.ru POKROVSKAYA
+6 Gleb Akimov Cracker 30 250000 gleb_1@mail.ru GAGARINA

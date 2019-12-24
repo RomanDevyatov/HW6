@@ -89,7 +89,6 @@ public class PersonData {
 
     public static int findByNameEmail(String name, String email) {
         if (!persons.isEmpty()) {
-
             int count = 0;
             Iterator<Map.Entry<Integer, Person>> iterator = persons.entrySet().iterator();
 

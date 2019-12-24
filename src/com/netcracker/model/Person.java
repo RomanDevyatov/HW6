@@ -26,6 +26,7 @@ public class Person {
     @Email(message = "Invalid email. Try again")
     private String email;
 
+
     private PersonJobAddressType jobAddress; //enum
 
     public Person(){

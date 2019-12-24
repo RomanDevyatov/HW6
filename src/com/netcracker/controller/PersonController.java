@@ -41,16 +41,14 @@ public class PersonController {
     }
 
     @GetMapping("/persons/download")
-    public void doDownload(HttpServletRequest request,
-                           HttpServletResponse response, Model model) throws IOException {
+    public void doDownload(HttpServletResponse response) throws IOException {
 
-        File downloadFile = new File("E:\\Java\\hw6-1\\resources\\download\\output.txt");
+        File downloadFile = new File("E:\\Java\\hw6-1\\\\resources\\download\\output.txt");
         InputStream inputStream= new BufferedInputStream((new FileInputStream(downloadFile)));
         String mimeType= URLConnection.guessContentTypeFromStream(inputStream);
 
         if(mimeType==null){
             mimeType= "application/msword";
-//            mimeType= "text/html";
         }
 
         response.setContentType(mimeType);
@@ -59,38 +57,7 @@ public class PersonController {
 
         FileCopyUtils.copy(inputStream, response.getOutputStream());
 
-//        model.addAttribute("title","All Persons");
-//        model.addAttribute( "persons", PersonData.getAll());
-//        return "persons/index";
     }
-
-
-
-//    @RequestMapping("/persons/{fileName:.+}")
-//    public void processDownloadPersons(HttpServletRequest request,
-//                                         HttpServletResponse response,
-//                                         Model model,
-//                                         @PathVariable("fileName") String fileName) throws IOException {
-//        String dataDirectory = request.getServletContext().getRealPath("/resource/");
-//        Path file = Paths.get(dataDirectory, fileName);
-//        if (Files.exists(file))
-//        {
-//            response.setContentType("text/plain");
-//            response.addHeader("Content-Disposition", "attachment; filename="+fileName);
-//            try
-//            {
-//                Files.copy(file, response.getOutputStream());
-//                response.getOutputStream().flush();
-//            }
-//            catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//
-//        model.addAttribute("title","All Persons");
-//        model.addAttribute( "persons", PersonData.getAll());
-//        //return "persons/index";
-//    }
 
     @GetMapping("persons/create")
     public String displayCreatePersonForm(Model model){
@@ -142,25 +109,15 @@ public class PersonController {
         return UserAgent.parseUserAgentString((request.getHeader("User-Agent")));
     }
 
-//    @ModelAttribute @Valid Person newFindPerson,
-//    Errors errors,
     @PostMapping("persons/find")
     public String processFindPersonsForm(@RequestParam String personName,
                                          @RequestParam String personLastName,
-                                         Model model, HttpServletRequest request, HttpServletResponse response){
-        HttpSession session=request.getSession(true);
-        Date creationTime=new Date(((HttpSession) session).getCreationTime());
-        Date lastAccessedTime = new Date(session.getLastAccessedTime());
-        String id=session.getId();
-//        if(errors.hasErrors()) {
-//            model.addAttribute("title", "Not Found, try again");
-//            return "persons/find";
-//        }
+                                         Model model, HttpServletRequest request){
 
         List<Person> perList=PersonData.findByNameLastName(personName, personLastName);
         if(perList.size()>0) {
             model.addAttribute("findpersons", perList);
-            String accessTime="access time = "+lastAccessedTime.toString();
+            String accessTime="access time = "+new Date();
             model.addAttribute("accessTime", accessTime);
             model.addAttribute("userAgent",  toKnowUserAgent(request));
             return "persons/findsuccess";
@@ -180,7 +137,8 @@ public class PersonController {
 
     @PostMapping("persons/login")
     public String processLoginPersonForm(@ModelAttribute @Valid Person newFindPerson,
-                                           Errors errors, Model model){
+                                         Errors errors,
+                                         Model model){
         if(errors.hasErrors()) {
             model.addAttribute("title", "Login. Uncorrected, try again");
             return "persons/login";

@@ -35,7 +35,7 @@ public class EmailController {
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.starttls.enable", "true");
 
-            props.put("mail.smtp.connectiontimeout", "60000"); // 60 seconds
+            props.put("mail.smtp.connectiontimeout", "60000");
             props.put("mail.smtp.timeout", "60000");
             props.put("mail.debug", "true");
 
